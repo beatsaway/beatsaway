@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beats Away - Choose Your Version</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .version-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .version-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: transform 0.3s ease, background 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .version-btn:hover {
+            transform: scale(1.05);
+            background: #45a049;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Beats Away 🎵</h1>
+    
+    <div class="version-grid">
+        <a href="beatmachine v1/beat.html" class="version-btn">
+            Version 1.0
+        </a>
+        <a href="beatmachine v1_01/beat.html" class="version-btn">
+            Version 1.01
+        </a>
+        <a href="beatmachine v1_02/beat.html" class="version-btn">
+            Version 1.02
+        </a>
+    </div>
+
+    <footer>
+        <p>🚀 Make music now! © 2023 Beats Away</p>
+    </footer>
+</body>
+</html>
