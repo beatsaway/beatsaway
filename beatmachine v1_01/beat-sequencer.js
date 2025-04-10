@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Store references to HTML elements
     const beatSelect = document.getElementById('beat-select');
     const playButton = document.getElementById('play');
-    const stopButton = document.getElementById('stop');
     const randomizeButton = document.getElementById('randomize');
     const resetSubdivisionsButton = document.getElementById('reset-subdivisions');
     const tempoSlider = document.getElementById('tempo');
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // State variables
     let currentBeat = null;
     let isPlaying = false;
-    let tempo = 120; // BPM
+    let tempo = 60; // BPM
     let beatSequence = [];
     let sequenceInterval = null;
     let currentBeatIndex = 0;
@@ -468,6 +467,83 @@ document.addEventListener('DOMContentLoaded', function() {
         
         beatSelect.value = randomBeat.name;
         setCurrentBeat(randomBeat.name);
+        
+        // 33% chance to subdivide each segment
+        repeatPatterns.forEach((patternStructure, repeatIndex) => {
+            patternStructure.forEach((segment, patternIndex) => {
+                // 33% chance (approximately) to subdivide this segment
+                if (Math.random() < 0.33) {
+                    // Toggle subdivision for this segment
+                    segment.isSubdivided = true;
+                    
+                    // Generate subdivisions based on the original segment
+                    segment.subdivisions = [];
+                    
+                    // Ensure the drum type is preserved
+                    const drumType = segment.drumType;
+                    
+                    if (segment.numerator > 1) {
+                        // Break down into multiple 1/denominator segments
+                        // Example: 3/8 -> 1/8 + 1/8 + 1/8
+                        for (let i = 0; i < segment.numerator; i++) {
+                            segment.subdivisions.push({
+                                numerator: 1,
+                                denominator: segment.denominator,
+                                value: 1 / segment.denominator,
+                                original: `1/${segment.denominator}`,
+                                drumType: drumType
+                            });
+                        }
+                    } else {
+                        // Divide by 2 for segments where numerator is 1
+                        // Example: 1/4 -> 1/8 + 1/8
+                        segment.subdivisions.push({
+                            numerator: 1,
+                            denominator: segment.denominator * 2,
+                            value: 1 / (segment.denominator * 2),
+                            original: `1/${segment.denominator * 2}`,
+                            drumType: drumType
+                        });
+                        
+                        segment.subdivisions.push({
+                            numerator: 1,
+                            denominator: segment.denominator * 2,
+                            value: 1 / (segment.denominator * 2),
+                            original: `1/${segment.denominator * 2}`,
+                            drumType: drumType
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Recalculate beat sequence with the new subdivisions
+        beatSequence = patternToTimings(repeatPatterns, tempo);
+        
+        // Update visualization
+        createBeatVisualization();
+        
+        // Show feedback to the user
+        const feedbackMessage = document.createElement('div');
+        feedbackMessage.style.position = 'fixed';
+        feedbackMessage.style.top = '10px';
+        feedbackMessage.style.left = '50%';
+        feedbackMessage.style.transform = 'translateX(-50%)';
+        feedbackMessage.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        feedbackMessage.style.color = 'white';
+        feedbackMessage.style.padding = '10px 20px';
+        feedbackMessage.style.borderRadius = '5px';
+        feedbackMessage.style.zIndex = '1000';
+        feedbackMessage.textContent = 'Random beat selected with random subdivisions';
+        
+        document.body.appendChild(feedbackMessage);
+        
+        // Remove the message after 2 seconds
+        setTimeout(() => {
+            feedbackMessage.style.opacity = '0';
+            feedbackMessage.style.transition = 'opacity 0.5s';
+            setTimeout(() => document.body.removeChild(feedbackMessage), 500);
+        }, 2000);
     }
 
     // Reset subdivisions button event listener - now resets all pattern repetitions
@@ -535,8 +611,6 @@ document.addEventListener('DOMContentLoaded', function() {
             startSequence();
         }
     });
-
-    stopButton.addEventListener('click', stopSequence);
 
     randomizeButton.addEventListener('click', () => {
         selectRandomBeat();
