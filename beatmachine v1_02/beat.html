@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beat Away - Drum Sequencer V1.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .beat-instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .controls {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        .control-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        select, button {
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            width: 100%;
+        }
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        #randomize {
+            background: #4CAF50;
+        }
+        #randomize:hover {
+            background: #45a049;
+        }
+        #stop {
+            background: #f44336;
+        }
+        #stop:hover {
+            background: #d32f2f;
+        }
+        #reset-subdivisions {
+            background: #ff9800;
+        }
+        #reset-subdivisions:hover {
+            background: #f57c00;
+        }
+        .tempo-control {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .tempo-display {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .drum-modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .drum-module {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .instrument-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .beat-info {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .beat-pattern {
+            font-family: monospace;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .beat-visualization {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .beat-segment {
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            background: #2196F3;
+        }
+        .active-segment {
+            background: #ff9800;
+            transform: scale(0.9);
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.7);
+        }
+        
+        /* Context Menu Styles */
+        .context-menu {
+            position: absolute;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            padding: 10px 0;
+            min-width: 200px;
+            z-index: 1000;
+            display: none;
+        }
+        .context-menu-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .context-menu-item:hover {
+            background: #f0f0f0;
+        }
+        .context-menu-separator {
+            height: 1px;
+            background: #ddd;
+            margin: 5px 0;
+        }
+        .context-menu-submenu {
+            position: relative;
+        }
+        .context-menu-submenu-content {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            padding: 10px 0;
+            min-width: 200px;
+            display: none;
+        }
+        .context-menu-submenu:hover .context-menu-submenu-content {
+            display: block;
+        }
+        .context-menu-param {
+            padding: 8px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .context-menu-param label {
+            font-size: 12px;
+            color: #666;
+        }
+        .context-menu-param input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .context-menu-param input[type="range"] {
+            width: 100%;
+        }
+        .context-menu-param-value {
+            font-size: 12px;
+            color: #333;
+            text-align: right;
+        }
+        
+        /* Drum-specific colors */
+        .beat-kick {
+            background: #2196F3;
+        }
+        .beat-bass {
+            background: #9C27B0;
+        }
+        .beat-snare {
+            background: #E91E63;
+        }
+        .beat-hihat {
+            background: #FF9800;
+        }
+        .beat-clap {
+            background: #4CAF50;
+        }
+        
+        /* Subdivided segments get slightly different shades */
+        .beat-segment.subdivided.beat-kick {
+            background: linear-gradient(to right, #2196F3, #64B5F6);
+        }
+        .beat-segment.subdivided.beat-bass {
+            background: linear-gradient(to right, #9C27B0, #BA68C8);
+        }
+        .beat-segment.subdivided.beat-snare {
+            background: linear-gradient(to right, #E91E63, #F06292);
+        }
+        .beat-segment.subdivided.beat-hihat {
+            background: linear-gradient(to right, #FF9800, #FFB74D);
+        }
+        .beat-segment.subdivided.beat-clap {
+            background: linear-gradient(to right, #4CAF50, #81C784);
+        }
+        
+        /* Drum module color coordination */
+        #kick-module .drum-pad {
+            background-color: #2196F3;
+        }
+        #bass-module .drum-pad {
+            background-color: #9C27B0;
+        }
+        #snare-module .drum-pad {
+            background-color: #E91E63;
+        }
+        #hihat-module .drum-pad {
+            background-color: #FF9800;
+        }
+        #clap-module .drum-pad {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Beat Away - Drum Sequencer V1.0</h1>
+  
+    
+    <div class="controls">
+        <div class="control-group">
+            <button id="play">Play Beat</button>
+        </div>
+        
+        <div class="control-group">
+            <button id="randomize">Random Beat</button>
+        </div>
+        
+        
+        <div class="control-group">
+            <button id="reset-subdivisions">Reset Subdivisions</button>
+        </div>
+        
+        <div class="control-group tempo-control">
+            <label for="tempo"></label>
+            <div class="tempo-slider-container">
+                <input type="range" id="tempo" min="30" max="200" value="60" step="1">
+                <span class="tempo-display">120 BPM</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="beat-info">
+        <div class="control-group">
+            <select id="beat-select">
+                <option value="">-- Select a beat --</option>
+                <!-- Will be populated by JavaScript -->
+            </select>
+        </div>
+        <div class="beat-visualization" id="beat-viz"></div>
+    </div>
+    
+    <div class="drum-modules">
+        <div class="drum-module" id="kick-module">
+            <div class="instrument-label">Kick Drum</div>
+            <button class="drum-pad" data-drum="kick">Play Kick</button>
+        </div>
+        <div class="drum-module" id="bass-module">
+            <div class="instrument-label">Bass Drum</div>
+            <button class="drum-pad" data-drum="bass">Play Bass</button>
+        </div>
+        <div class="drum-module" id="snare-module">
+            <div class="instrument-label">Snare Drum</div>
+            <button class="drum-pad" data-drum="snare">Play Snare</button>
+        </div>
+        <div class="drum-module" id="hihat-module">
+            <div class="instrument-label">Hi-Hat</div>
+            <button class="drum-pad" data-drum="hihat">Play Hi-Hat</button>
+        </div>
+        <div class="drum-module" id="clap-module">
+            <div class="instrument-label">Clap</div>
+            <button class="drum-pad" data-drum="clap">Play Clap</button>
+        </div>
+    </div>
+    
+    <!-- Context Menu for Sound Editing -->
+    <div class="context-menu" id="sound-context-menu">
+        <div class="context-menu-item" data-action="change-sound">Change Sound Type</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" data-action="edit-params">Edit Parameters</div>
+    </div>
+    
+    <!-- Sound Type Submenu -->
+    <div class="context-menu" id="sound-type-menu">
+        <div class="context-menu-item" data-sound="kick">Kick Drum</div>
+        <div class="context-menu-item" data-sound="bass">Bass Drum</div>
+        <div class="context-menu-item" data-sound="snare">Snare Drum</div>
+        <div class="context-menu-item" data-sound="hihat">Hi-Hat</div>
+        <div class="context-menu-item" data-sound="clap">Clap</div>
+    </div>
+    
+    <!-- Parameters Submenu -->
+    <div class="context-menu" id="params-menu">
+        <!-- Parameters will be generated dynamically -->
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" data-action="apply-params">Apply Parameters</div>
+    </div>
+    
+    <script>
+        // Function to generate parameter controls for each drum type
+        function generateParameterControls() {
+            const paramsMenu = document.getElementById('params-menu');
+            const drumTypes = {
+                'kick': window.KickDrum,
+                'bass': window.BassDrum,
+                'snare': window.SnareDrum,
+                'hihat': window.HiHat,
+                'clap': window.Clap
+            };
+
+            // Generate parameter groups for each drum type
+            for (const [drumType, DrumClass] of Object.entries(drumTypes)) {
+                if (!DrumClass || !DrumClass.parameterNames) continue;
+
+                const paramGroup = document.createElement('div');
+                paramGroup.className = 'context-menu-param-group';
+                paramGroup.dataset.sound = drumType;
+
+                // Generate controls for each parameter
+                for (const [paramName, paramConfig] of Object.entries(DrumClass.parameterNames)) {
+                    const paramDiv = document.createElement('div');
+                    paramDiv.className = 'context-menu-param';
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `${drumType}-${paramName}`;
+                    label.textContent = paramConfig.label;
+
+                    const input = document.createElement('input');
+                    input.type = 'range';
+                    input.id = `${drumType}-${paramName}`;
+                    input.min = paramConfig.min;
+                    input.max = paramConfig.max;
+                    input.step = paramConfig.max <= 1 ? 0.1 : 1;
+                    input.value = paramConfig.default;
+
+                    const valueSpan = document.createElement('span');
+                    valueSpan.className = 'context-menu-param-value';
+                    valueSpan.textContent = paramConfig.default;
+
+                    // Add event listener to update the value display
+                    input.addEventListener('input', function() {
+                        valueSpan.textContent = this.value;
+                    });
+
+                    paramDiv.appendChild(label);
+                    paramDiv.appendChild(input);
+                    paramDiv.appendChild(valueSpan);
+                    paramGroup.appendChild(paramDiv);
+                }
+
+                paramsMenu.appendChild(paramGroup);
+            }
+        }
+
+        // Generate parameter controls when the document is loaded
+        document.addEventListener('DOMContentLoaded', generateParameterControls);
+    </script>
+    
+    <script src="beatlist.js"></script>
+    <script src="ss_kick.js"></script>
+    <script src="ss_bass.js"></script>
+    <script src="ss_snare.js"></script>
+    <script src="ss_hihat.js"></script>
+    <script src="ss_clap.js"></script>
+    <script src="beat-segment.js"></script>
+    <script src="beat-sequencer.js"></script>
+</body>
+</html>
