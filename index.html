@@ -54,6 +54,27 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
+        /* Special styling for the newest version */
+        .version-btn.newest {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border: 2px solid #fff;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .version-btn.newest::after {
+            content: "NEWEST";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #FF5722;
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
         footer {
             margin-top: 40px;
             color: #888;
@@ -64,19 +85,4 @@
     <h1>Beats Away 🎵</h1>
     
     <div class="version-grid">
-        <a href="beatmachine v1/beat.html" class="version-btn">
-            Version 1.0
-        </a>
-        <a href="beatmachine v1_01/beat.html" class="version-btn">
-            Version 1.01
-        </a>
-        <a href="beatmachine v1_02/beat.html" class="version-btn">
-            Version 1.02
-        </a>
-    </div>
-
-    <footer>
-        <p>🚀 Make music now! © 2023 Beats Away</p>
-    </footer>
-</body>
-</html>
+        <
