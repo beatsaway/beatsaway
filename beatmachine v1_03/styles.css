@@ -1,0 +1,596 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+/* Top Toolbar */
+.top-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.logo-container h1 {
+    margin: 0;
+    font-size: 22px;
+    color: #333;
+}
+
+.logo-container h2 {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    font-weight: normal;
+}
+
+.toolbar-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.toolbar-controls button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    background: #2196F3;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toolbar-controls button:hover {
+    background: #1976D2;
+}
+
+.toolbar-controls #randomize {
+    background: #4CAF50;
+}
+
+.toolbar-controls #randomize:hover {
+    background: #45a049;
+}
+
+.toolbar-controls #reset-subdivisions {
+    background: #ff9800;
+}
+
+.toolbar-controls #reset-subdivisions:hover {
+    background: #f57c00;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+h2 {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+}
+
+/* Panel styles */
+.panel {
+    background: white;
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.parameter-panel, .sound-type-panel {
+    display: none;
+}
+
+/* Beat select styles */
+#beat-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#beat-select:hover {
+    border-color: #2196F3;
+}
+
+#beat-select:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Controls and buttons */
+.control-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+button {
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    font-size: 16px;
+    width: 100%;
+    background: #2196F3;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #1976D2;
+}
+
+#randomize {
+    background: #4CAF50;
+}
+
+#randomize:hover {
+    background: #45a049;
+}
+
+#reset-subdivisions {
+    background: #ff9800;
+}
+
+#reset-subdivisions:hover {
+    background: #f57c00;
+}
+
+/* Tempo controls */
+.tempo-control {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 300px;
+}
+
+.tempo-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.tempo-slider-container input[type="range"] {
+    flex: 1;
+    min-width: 150px;
+}
+
+.tempo-display {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 60px;
+}
+
+/* Beat visualization */
+.beat-visualization {
+    display: flex;
+    gap: 1px;
+    flex-wrap: wrap;
+    margin-top: 2px;
+}
+
+/* Sound type panel */
+.sound-type-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sound-type-select:hover {
+    border-color: #2196F3;
+}
+
+.sound-type-select:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Parameter controls */
+.parameter-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding: 4px;
+    background: #f8f8f8;
+    border-radius: 4px;
+}
+
+.parameter-control label {
+    min-width: 120px;
+    font-size: 14px;
+    color: #555;
+}
+
+.parameter-control input[type="range"] {
+    flex: 1;
+    margin: 0;
+}
+
+.value-display {
+    min-width: 50px;
+    text-align: right;
+    font-size: 14px;
+    color: #666;
+    font-family: monospace;
+}
+
+/* Drum modules */
+.drum-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.drum-module {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.instrument-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Beat visualization */
+.beat-segment {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 5px;
+    text-align: center;
+    margin: 1px;
+    height: auto;
+    min-height: 40px;
+    font-size: 12px;
+}
+
+.beat-segment:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+.beat-segment.subdivided {
+    border-right: 1px dashed rgba(255,255,255,0.5);
+}
+
+.beat-segment.subdivided:last-child {
+    border-right: none;
+}
+
+.active-segment {
+    transform: scale(0.9);
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.7);
+    z-index: 10;
+}
+
+.selected-segment {
+    z-index: 10;
+    filter: brightness(0.85);
+    border: 2px solid #525252;
+}
+
+/* Drum-specific colors */
+.beat-kick {
+    background: #2196F3;
+}
+
+.beat-bass {
+    background: #9C27B0;
+}
+
+.beat-snare {
+    background: #E91E63;
+}
+
+.beat-hihat {
+    background: #FF9800;
+}
+
+.beat-clap {
+    background: #4CAF50;
+}
+
+/* Subdivided segments */
+.beat-segment.subdivided.beat-kick {
+    background: linear-gradient(to right, #2196F3, #64B5F6);
+}
+
+.beat-segment.subdivided.beat-bass {
+    background: linear-gradient(to right, #9C27B0, #BA68C8);
+}
+
+.beat-segment.subdivided.beat-snare {
+    background: linear-gradient(to right, #E91E63, #F06292);
+}
+
+.beat-segment.subdivided.beat-hihat {
+    background: linear-gradient(to right, #FF9800, #FFB74D);
+}
+
+.beat-segment.subdivided.beat-clap {
+    background: linear-gradient(to right, #4CAF50, #81C784);
+}
+
+/* Drum module color coordination */
+#kick-module .drum-pad {
+    background-color: #2196F3;
+}
+
+#bass-module .drum-pad {
+    background-color: #9C27B0;
+}
+
+#snare-module .drum-pad {
+    background-color: #E91E63;
+}
+
+#hihat-module .drum-pad {
+    background-color: #FF9800;
+}
+
+#clap-module .drum-pad {
+    background-color: #4CAF50;
+}
+
+/* Beat container */
+.beat-container {
+    display: flex;
+    margin: 1px;
+    border: 1px dashed #aaa;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.pattern-repeat {
+    border: 1px solid #ddd;
+    background-color: rgba(0,0,0,0.02);
+    border-radius: 4px;
+    padding: 2px;
+    margin: 1px;
+}
+
+/* Preset controls */
+.preset-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.preset-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    padding: 5px 0;
+    pointer-events: auto;
+}
+
+.preset-control label {
+    min-width: 80px;
+    font-size: 14px;
+    color: #555;
+}
+
+.preset-select {
+    flex: 1;
+    min-width: 150px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+    pointer-events: auto;
+}
+
+.preset-select:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.preset-select:hover:not(:disabled) {
+    border-color: #2196F3;
+}
+
+.preset-select:focus:not(:disabled) {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Humanize controls */
+.humanize-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.humanize-label {
+    display: inline-block;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    user-select: none;
+    pointer-events: auto;
+}
+
+.humanize-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 11;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #666;
+    border-radius: 3px;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.humanize-checkbox:checked {
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+
+.humanize-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.humanize-checkbox:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    background-color: #f5f5f5;
+    border-color: #ccc;
+}
+
+.humanize-checkbox:not(:disabled):hover {
+    border-color: #2196F3;
+}
+
+/* Ensure proper spacing in preset controls */
+.preset-control > * {
+    flex-shrink: 0;
+    pointer-events: auto;
+}
+
+.preset-select {
+    flex: 1;
+    min-width: 150px;
+    pointer-events: auto;
+}
+
+#mastersound-info {
+    position: relative;
+    z-index: 1;
+}
+
+#mastersound-info:not([style*="opacity: 0.5"]) {
+    pointer-events: auto;
+}
+
+#mastersound-info[style*="opacity: 0.5"] {
+    pointer-events: none;
+}
+
+#mastersound-info[style*="opacity: 0.5"] .humanize-checkbox,
+#mastersound-info[style*="opacity: 0.5"] .humanize-label {
+    pointer-events: none;
+}
+
+/* BPM Control */
+.bpm-control {
+    position: relative;
+}
+
+#bpm-button {
+    background: #9C27B0;
+    min-width: 80px;
+}
+
+#bpm-button:hover {
+    background: #7B1FA2;
+}
+
+.bpm-popup {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 100;
+    margin-top: 5px;
+    min-width: 250px;
+}
+
+.bpm-popup.active {
+    display: block;
+} 

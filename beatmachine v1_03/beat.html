@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beats Away V1.03</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="top-toolbar">
+        <div class="logo-container">
+            <h1>Beats Away V1.03</h1>
+            <h2>from sound tuning to groovy loops</h2>
+        </div>
+        <div class="toolbar-controls">
+            <button id="play">Play Beat</button>
+            <button id="randomize">Random Beat</button>
+            <button id="reset-subdivisions">Reset Subdivisions</button>
+            <div class="bpm-control">
+                <button id="bpm-button">120 BPM</button>
+                <div class="bpm-popup">
+                    <div class="tempo-slider-container">
+                        <input type="range" id="tempo" min="30" max="200" value="120" step="1">
+                        <span class="tempo-display">120 BPM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel" id="mastersound-info">
+        <div class="control-group">
+            <button id="randomize_samples">Random Samples</button>
+            <button id="randomize_presets">Random Presets</button>
+        </div>
+        <div class="preset-controls">
+            <div class="preset-control">
+                <label for="kick-preset">Kick Preset:</label>
+                <select id="kick-preset" class="preset-select">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+                <div class="humanize-container">
+                    <input type="checkbox" id="kick-humanize" class="humanize-checkbox">
+                    <label for="kick-humanize" class="humanize-label">Humanize</label>
+                </div>
+            </div>
+            <div class="preset-control">
+                <label for="snare-preset">Snare Preset:</label>
+                <select id="snare-preset" class="preset-select">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+                <div class="humanize-container">
+                    <input type="checkbox" id="snare-humanize" class="humanize-checkbox">
+                    <label for="snare-humanize" class="humanize-label">Humanize</label>
+                </div>
+            </div>
+            <div class="preset-control">
+                <label for="bass-preset">Bass Preset:</label>
+                <select id="bass-preset" class="preset-select">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+                <div class="humanize-container">
+                    <input type="checkbox" id="bass-humanize" class="humanize-checkbox">
+                    <label for="bass-humanize" class="humanize-label">Humanize</label>
+                </div>
+            </div>
+            <div class="preset-control">
+                <label for="hihat-preset">Hi-Hat Preset:</label>
+                <select id="hihat-preset" class="preset-select">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+                <div class="humanize-container">
+                    <input type="checkbox" id="hihat-humanize" class="humanize-checkbox">
+                    <label for="hihat-humanize" class="humanize-label">Humanize</label>
+                </div>
+            </div>
+            <div class="preset-control">
+                <label for="clap-preset">Clap Preset:</label>
+                <select id="clap-preset" class="preset-select">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+                <div class="humanize-container">
+                    <input type="checkbox" id="clap-humanize" class="humanize-checkbox">
+                    <label for="clap-humanize" class="humanize-label">Humanize</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel" id="beat-info">
+        <div class="control-group">
+            <select id="beat-select">
+                <option value="">-- Select a beat --</option>
+                <!-- Will be populated by JavaScript -->
+            </select>
+        </div>
+        <div class="beat-visualization" id="beat-viz"></div>
+    </div>
+    
+    <!-- Sound Type Panel -->
+    <div class="panel sound-type-panel" id="sound-type-panel">
+        <h3>Change Sound Type</h3>
+        <select id="sound-type-select" class="sound-type-select">
+            <option value="kick">Kick Drum</option>
+            <option value="bass">Bass Drum</option>
+            <option value="snare">Snare Drum</option>
+            <option value="hihat">Hi-Hat</option>
+            <option value="clap">Clap</option>
+        </select>
+    </div>
+
+    <!-- Parameter Panel -->
+    <div class="panel parameter-panel" id="parameter-panel">
+        <h3>Sound Parameters</h3>
+        <div class="parameter-controls" id="parameter-controls">
+            <!-- Parameter controls will be generated dynamically -->
+        </div>
+    </div>
+    
+    <script src="beatlist.js"></script>
+    <script src="sound_presets.js"></script>
+    <script src="ss_kick.js"></script>
+    <script src="ss_bass.js"></script>
+    <script src="ss_snare.js"></script>
+    <script src="ss_hihat.js"></script>
+    <script src="ss_clap.js"></script>
+    <script src="beat-segment.js"></script>
+    <script src="beat-sequencer.js"></script>
+</body>
+</html>
