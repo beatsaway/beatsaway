@@ -3,23 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beats Away 🎶 | Choose Your Version</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+    <title>Beats Away V1.03 | From Sample Tuning to Groovy Loops</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #6C5CE7;
             --secondary: #00CEFF;
-            --dark: #1A1A2E;
+            --dark: #121212;
             --light: #F1F1F1;
-            --accent: #FF3E4D;
-            --glow: 0 0 15px rgba(108, 92, 231, 0.7);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
         body {
@@ -31,190 +23,129 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
-            position: relative;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            text-align: center;
+            padding: 20px;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(108, 92, 231, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(0, 206, 255, 0.15) 0%, transparent 40%);
-            z-index: -1;
+                radial-gradient(circle at 20% 30%, rgba(108, 92, 231, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 206, 255, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, #121212, #000000);
         }
 
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 10px rgba(108, 92, 231, 0.3);
-            position: relative;
-            animation: float 3s ease-in-out infinite;
+            line-height: 1;
         }
 
-        h1 i {
-            margin-left: 15px;
-            animation: pulse 2s infinite;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
+        h2 {
+            font-weight: 300;
+            font-size: 1.5rem;
             opacity: 0.8;
             margin-bottom: 3rem;
-            max-width: 600px;
-        }
-
-        .version-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1000px;
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        .version-btn {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 1.3rem;
-            transition: all 0.4s ease;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
-
-        .version-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .version-btn:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .version-btn:hover::before {
-            left: 100%;
-        }
-
-        .version-btn .version-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--secondary);
-        }
-
-        /* Special styling for newest version */
-        .version-btn.newest {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            box-shadow: var(--glow);
-            animation: glow-pulse 2s infinite;
-        }
-
-        .version-btn.newest .version-icon {
-            color: white;
-        }
-
-        .version-btn.newest::after {
-            content: "NEWEST";
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--accent);
-            color: white;
-            font-size: 0.7rem;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
+        .launch-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.7);
+        }
+
+        .launch-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .launch-btn:hover i {
+            transform: rotate(45deg);
+        }
+
         footer {
-            margin-top: 4rem;
-            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5rem;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
 
-        /* Animations */
+        /* Animated circles decoration */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--secondary);
+            bottom: -50px;
+            right: -50px;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 20px); }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% { box-shadow: var(--glow); }
-            50% { box-shadow: 0 0 25px rgba(108, 92, 231, 0.9); }
-        }
-
-        /* Responsive adjustments */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            .version-grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <h1>Beats Away <i class="fas fa-music"></i></h1>
-    <p class="subtitle">Choose your version and start creating amazing beats instantly!</p>
-    
-    <div class="version-grid">
-       
-        <a href="beatmachine v1_03/beat.html" class="version-btn newest">
-            <div class="version-icon"><i class="fas fa-bolt"></i></div>
-            Version 1.03
-            <small>Newest Version</small>
-        </a>
-    </div>
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+
+    <h1>Beats Away V1.03</h1>
+    <h2>from sound tuning to groovy loops</h2>
+
+    <a href="beatmachine v1_03/beat.html" class="launch-btn">
+        Launch App <i class="fas fa-arrow-right"></i>
+    </a>
 
     <footer>
-        <p>Made with <i class="fas fa-heart" style="color: var(--accent);"></i> for music creators worldwide | © 2023 Beats Away</p>
+        <p>© 2023 Beats Away | Made with <i class="fas fa-heart" style="color: #FF3E4D;"></i> for music creators</p>
     </footer>
 
     <script>
-        // Add a cool audio effect when hovering buttons
-        document.querySelectorAll('.version-btn').forEach(btn => {
-            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
-            btn.addEventListener('mouseenter', () => {
-                audio.currentTime = 0;
-                audio.volume = 0.3;
-                audio.play();
-            });
+        // Cool hover sound effect
+        const btn = document.querySelector('.launch-btn');
+        const hoverSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
+        
+        btn.addEventListener('mouseenter', () => {
+            hoverSound.currentTime = 0;
+            hoverSound.volume = 0.2;
+            hoverSound.play();
         });
     </script>
 </body>
